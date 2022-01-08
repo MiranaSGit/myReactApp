@@ -41,7 +41,7 @@ deploy:
     - terraform init
     - terraform apply -var "image=${ECR_REGISTRY}/${APP_REPO_NAME}" -auto-approve
 remove:
-  stage: remove
+  stage: Remove
   tags:
     - runner
   when: manual

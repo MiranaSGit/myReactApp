@@ -12,6 +12,7 @@ In this project a sample react app was deployed on AWS cloud by using ESC Fargat
 - Provision VPC, ECR and Gitlab instances using related terraform files under root directory. <br />
   * Replace your key-pair in the variable.tf file. <br />
   * Replace your gitlab-url in the gitlab.tf file. <br />
+  * Replace your app-url in the alb.tf file under ecs-alb directory. <br />
 - After gitlab instances provisioned, create root password on the gitlab server for gitlab login <br />
   * sudo gitlab-rake "gitlab:password:reset"
 - Register runner instance to gitlab server: <br />

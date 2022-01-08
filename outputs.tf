@@ -1,7 +1,7 @@
-# output "alburl" {
-#   value = aws_lb.alb.dns_name
-# }
+output "gitlab_ip" {
+  value = aws_instance.gitlab.public_ip
+}
 
-# output "aws_ecr_repository_url" {
-#   value = aws_ecr_repository.main.repository_url
-# }
+output "gitlab-runner_ip" {
+  value = aws_instance.gitlab-runner.public_ip
+}
