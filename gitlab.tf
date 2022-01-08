@@ -58,19 +58,19 @@ resource "aws_instance" "gitlab" {
   }
 }
 
-# resource "aws_instance" "gitlab-runner" {
-#   ami                         = data.aws_ami.ubuntu-ami.id
-#   instance_type               = "t3.medium"
-#   key_name                    = var.key_name
-#   vpc_security_group_ids      = [aws_security_group.sec-gr.id]
-#   subnet_id                   = aws_subnet.demo_subnets[0].id
-#   user_data                   = file("gitlab-userdata.sh")
-#   associate_public_ip_address = true
-#   iam_instance_profile        = aws_iam_instance_profile.ec2-profile.name
-#   tags = {
-#     Name = "GitLab-Runner"
-#   }
-# }
+resource "aws_instance" "gitlab-runner" {
+  ami                         = data.aws_ami.ubuntu-ami.id
+  instance_type               = "t3.medium"
+  key_name                    = var.key_name
+  vpc_security_group_ids      = [aws_security_group.sec-gr.id]
+  subnet_id                   = aws_subnet.demo_subnets[0].id
+  user_data                   = file("gitlabrunner-userdata.sh")
+  associate_public_ip_address = true
+  iam_instance_profile        = aws_iam_instance_profile.ec2-profile.name
+  tags = {
+    Name = "GitLab-Runner"
+  }
+}
 
 resource "aws_security_group" "sec-gr" {
   name   = "gitlab-secgr"

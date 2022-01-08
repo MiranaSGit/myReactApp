@@ -12,9 +12,7 @@ variable "az_count" {
 }
 
 variable "managed_policies" {
-  default = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess",
-    "arn:aws:iam::aws:policy/AdministratorAccess",
-  ]
+  default = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"]
 }
 
 variable "key_name" {

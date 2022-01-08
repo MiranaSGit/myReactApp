@@ -2,9 +2,7 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "image" {
-  default = "360800251837.dkr.ecr.us-east-1.amazonaws.com/demo-app:latest"
-}
+variable "image" {}
 
 variable "container_port" {
   default = "3000"
