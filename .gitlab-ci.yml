@@ -5,6 +5,7 @@ stages:
   - Build
   - Push to ECR
   - Deploy
+  - Remove
 build:
   stage: Build
   tags:
@@ -18,7 +19,6 @@ build:
     - cd myReactApp
     - docker build --force-rm -t ${ECR_REGISTRY}/${APP_REPO_NAME} .
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}
-
 Push to ECR:
   stage: Push to ECR
   tags:
@@ -28,7 +28,6 @@ Push to ECR:
     - export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
     - export ECR_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
     - docker push ${ECR_REGISTRY}/${APP_REPO_NAME}
-
 deploy:
   stage: Deploy
   tags:
@@ -38,6 +37,16 @@ deploy:
     - export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
     - export ECR_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
     - git clone https://github.com/MiranaSGit/myReactApp.git
-    - cd myReactApp/ecs-alb
+    - cp -R myReactApp/ecs-alb /tmp && cd /tmp/ecs-alb
     - terraform init
     - terraform apply -var "image=${ECR_REGISTRY}/${APP_REPO_NAME}" -auto-approve
+remove:
+  stage: remove
+  tags:
+    - runner
+  when: manual
+  script:
+    - export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+    - export ECR_REGISTRY=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+    - cd /tmp/ecs-alb
+    - terraform destroy -var "image=${ECR_REGISTRY}/${APP_REPO_NAME}" -auto-approve
