@@ -8,10 +8,13 @@ In this project a sample react app was deployed on AWS cloud by using ESC Fargat
 - Lastly, react app code deployed on ECS Fargate using GitLab.
 ![Skeleton](https://github.com/MiranaSGit/myReactApp/blob/main/Skeleton.png)
 
-## Notes:
-- Gitlab server root password: <br />
-  sudo gitlab-rake "gitlab:password:reset"
-- Register runner: <br />
-  sudo gitlab-runner register
-- Replace your key-pair in the variable.tf file.
-- Replace your gitlab url in the gitlab.tf and userdata files.
+## Steps:
+- Provision VPC, ECR and Gitlab instances using related terraform files under root directory. <br />
+  * Replace your key-pair in the variable.tf file. <br />
+  * Replace your gitlab-url in the gitlab.tf file. <br />
+- After gitlab instances provisioned, create root password on the gitlab server for gitlab login <br />
+  * sudo gitlab-rake "gitlab:password:reset"
+- Register runner instance to gitlab server: <br />
+  * sudo gitlab-runner register
+- Deploy the project using gitlab-ci.yml file. <br />
+
