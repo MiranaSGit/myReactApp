@@ -18,7 +18,6 @@ build:
     - git clone https://github.com/MiranaSGit/myReactApp.git
     - cd myReactApp
     - docker build --force-rm -t ${ECR_REGISTRY}/${APP_REPO_NAME} .
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}
 Push to ECR:
   stage: Push to ECR
   tags:
