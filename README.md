@@ -1,4 +1,4 @@
-# React App Project with Terraform
+# React App Project with Terraform and GitLab
 In this project a sample react app was deployed on AWS cloud by using ESC Fargate infrastructure. All infrastructure setup by using terraform.
 - Seperate VPC and two subnets formed in different AZs for high availability.
 - An application load balancer created for directing incoming request to AWS Fargate.
